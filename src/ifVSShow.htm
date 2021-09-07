@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.5/vue.global.prod.min.js"></script>
+  <title>v-if与v-show的区别</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="isShow = !isShow">Toggle</button>
+    <p v-if="isShow">v-if效果</p>
+    <p v-show="isShow">v-show效果</p>
+    <child v-if="isShow" title="v-if"></child>
+    <child v-show="isShow" title="v-show"></child>
+  </div>
+  <script src="ifshow.js"></script>
+</body>
+</html>
