@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.5/vue.global.prod.min.js"></script>
+  <title>
+    非Prop的Attribute
+  </title>
+</head>
+<body>
+  <div id="app">
+    <username 
+      class="username" 
+      :error="errorMsg"
+      @input="onInput"
+    >
+    </username>
+  </div>
+  <script>
+    const Username = {
+      props: ['error'],
+      template: `
+        <fieldset>
+          <legend>用户名</legend>
+          <input :="$attrs">
+          <div>{{ error }}</div>
+        </fieldset>
+      `,
+      // $attrs获取了父组件的属性。
+    };
+
+    const application = {
+      components: {
+        Username,
+      },
+      data() {
+        return {
+          errorMsg: '',
+        };
+      },
+      methods: {
+        onInput(e) {
+          this.errorMsg = e.target.value.length < 6 ? 'not long enough' : 'correct';
+        },
+      },
+    };
+
+    Vue.createApp(application).mount('#app');
+  </script>
+</body>
+</html>

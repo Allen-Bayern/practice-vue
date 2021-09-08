@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.5/vue.global.prod.min.js"></script>
+  <title>
+    自定义事件
+  </title>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ username }}</h1>
+    <User
+      class="username"
+      :data-user="username"
+      @user-change="username=$event"
+    ></User>
+  </div>
+  <script>
+    const User = {
+      props: ['dataUser'],
+      events: ['user-change'], // 自定义事件
+      template: `
+        <div>
+          {{ dataUser }}
+          <button @click="updateUser">更新</button>  
+        </div>
+      `,
+      methods: {
+        updateUser() {
+          this.$emit('user-change', this.dataUser + '!');
+        },
+      },
+    };
+
+    Vue.createApp({
+      components: {
+        User,
+      },
+      data() {
+        return {
+          username: 'Him'
+        };
+      },
+    }).mount('#app');
+  </script>
+</body>
+</html>
